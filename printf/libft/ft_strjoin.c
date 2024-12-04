@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/17 23:51:51 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 16:46:56 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	va_list ptr;
+	char	*result;
 	size_t	i;
+	size_t	j;
 
 	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!result)
+		return (0);
+	while (i < ft_strlen(s1))
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
+		result[i] = s1[i];
 		i++;
 	}
-	va_end(ptr);
-	return (0);
+	while (j++ < ft_strlen(s2))
+		result[(i + j) - 1] = s2[j - 1];
+	result[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	return (result);
 }

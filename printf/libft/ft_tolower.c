@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/09 23:30:40 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 16:08:56 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_printf(const char *str,  ...)
+int	ft_tolower(int c)
 {
-	va_list ptr;
-	size_t	i;
-
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
-	}
-	va_end(ptr);
-	return (0);
+	if (c >= 65 && c <= 90)
+		c += 32;
+	return (c);
 }

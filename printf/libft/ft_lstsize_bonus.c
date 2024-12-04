@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/22 20:50:12 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 20:37:05 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+int	ft_lstsize(t_list *lst)
 {
-	va_list ptr;
-	size_t	i;
+	size_t		i;
 
 	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	while (lst != NULL)
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
+		lst = lst->next;
 		i++;
 	}
-	va_end(ptr);
-	return (0);
+	return (i);
 }

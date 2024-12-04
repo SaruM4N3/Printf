@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/19 03:55:46 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 14:36:14 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_printf(const char *str,  ...)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	va_list ptr;
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (!s || !f)
+		return ;
+	while (s[i])
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
+		f(i, &s[i]);
 		i++;
 	}
-	va_end(ptr);
-	return (0);
 }

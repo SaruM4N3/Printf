@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/19 02:07:29 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 17:03:39 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <unistd.h>
 
-int	ft_printf(const char *str,  ...)
+void	ft_putnbr_fd(int n, int fd)
 {
-	va_list ptr;
-	size_t	i;
+	unsigned int	un;
+	char			c;
 
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (fd < 0)
+		return ;
+	if (n < 0)
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
+		un = (unsigned int) -n;
+		write (fd, "-", 1);
 	}
-	va_end(ptr);
-	return (0);
+	else
+		un = n;
+	if (un <= 9)
+	{
+		c = un + 48;
+		write (fd, &c, 1);
+	}
+	else
+	{
+		ft_putnbr_fd(un / 10, fd);
+		ft_putnbr_fd(un % 10, fd);
+	}
 }

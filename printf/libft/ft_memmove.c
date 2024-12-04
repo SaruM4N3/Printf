@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/09 23:28:03 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 16:59:36 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	va_list ptr;
-	size_t	i;
-
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (dest > src)
 	{
-		if (str[i] == '%')
+		while (n > 0)
 		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
+			((unsigned char *)dest)[n - 1] = ((unsigned char *)src)[n - 1];
+			n--;
 		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
+		return (dest);
 	}
-	va_end(ptr);
-	return (0);
+	else
+		ft_memcpy (dest, src, n);
+	return (dest);
 }

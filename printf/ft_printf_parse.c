@@ -6,14 +6,36 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:31:36 by zsonie            #+#    #+#             */
-/*   Updated: 2024/11/30 07:11:09 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/04 04:21:37 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_printf_parse(const char *, ...)
+#include "ft_printf.h"
+#include "libft/libft.h"
+
+int	ft_printf_action(char current, va_list args)
 {
-	
+	if (current == 'c')
+		ft_putchar_fd(va_arg(args, int), 1);
+	else if (current == 's')
+		ft_putstr_fd(va_arg(args, char *), 1);
+	else if (current == 'p')
+		return ('p');
+	else if (current == 'd')
+		ft_putnbr_fd(va_arg(args, int), 1);
+	else if (current == 'i')
+		ft_putnbr_fd(va_arg(args, int), 1);
+	else if (current == 'u')
+		return ('u');
+	else if (current == 'x')
+		return ('x');
+	else if (current == 'X')
+		return ('X');
+	else if (current == '%')
+		ft_putchar_fd('%', 1);
+	return (-1);
 }
+
 
 /*
 TODO:

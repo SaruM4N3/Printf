@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/19 02:06:53 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 23:45:19 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 
-int	ft_printf(const char *str,  ...)
+void	ft_putendl_fd(char *s, int fd)
 {
-	va_list ptr;
-	size_t	i;
+	int		i;
 
+	if (!s || fd <= 0)
+		return ;
 	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
+		if (write (fd, &s[i], 1) < 0)
+			return ;
 		i++;
 	}
-	va_end(ptr);
-	return (0);
+	write (fd, "\n", 1);
 }
+
+// int main(void)
+// {
+// 	ft_putendl_fd("asjgdjdshbgfdsjjfbxcjhbviks", 0);
+// }

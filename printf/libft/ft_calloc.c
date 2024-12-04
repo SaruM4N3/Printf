@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/17 03:05:58 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 22:54:27 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	va_list ptr;
-	size_t	i;
+	size_t	total;
+	void	*res;
 
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
-	}
-	va_end(ptr);
-	return (0);
+	total = nmemb * size;
+	if (size != 0 && total / size != nmemb)
+		return (malloc(0));
+	res = malloc(total);
+	if (!res)
+		return (NULL);
+	ft_memset(res, 0, total);
+	return (res);
 }

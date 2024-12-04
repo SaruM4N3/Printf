@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/23 04:51:54 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 01:39:56 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	va_list ptr;
-	size_t	i;
+	t_list	*current;
+	t_list	*next;
 
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	current = *lst;
+	while (current)
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
+		next = current->next;
+		ft_lstdelone(current, del);
+		current = next;
 	}
-	va_end(ptr);
-	return (0);
+	*lst = NULL;
 }

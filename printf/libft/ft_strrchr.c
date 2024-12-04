@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/09 23:30:35 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/16 01:23:26 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+char	*ft_strrchr(const char *s, int c)
 {
-	va_list ptr;
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	len = ft_strlen(s);
+	while (s[len] != (char ) c && len > 0)
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
+		len--;
 	}
-	va_end(ptr);
+	if (s[len] == (char ) c)
+		return (&((char *)s)[len]);
 	return (0);
 }

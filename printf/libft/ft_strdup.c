@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/07 17:05:15 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 14:34:25 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+char	*ft_strdup(char *src)
 {
-	va_list ptr;
-	size_t	i;
+	char	*strd;
+	int		i;
 
 	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (!src)
+		return (NULL);
+	while (src[i])
+		i++;
+	strd = malloc(i + 1);
+	if (!strd)
+		return (0);
+	i = 0;
+	while (*src)
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
+		strd[i] = *src++;
 		i++;
 	}
-	va_end(ptr);
-	return (0);
+	strd[i] = 0;
+	return (strd);
 }

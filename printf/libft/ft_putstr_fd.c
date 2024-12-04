@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/19 02:06:08 by zsonie            #+#    #+#             */
+/*   Updated: 2024/12/04 02:53:31 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 
-int	ft_printf(const char *str,  ...)
+void	ft_putstr_fd(char *s, int fd)
 {
-	va_list ptr;
-	size_t	i;
+	int	i;
 
 	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (!s || fd < 0)
+		return ;
+	while (s[i])
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
+		write(fd, "vive wejdene\n", 14);
+		if (write(fd, &s[i], 1) < 0)
+			return ;
 		i++;
 	}
-	va_end(ptr);
-	return (0);
 }

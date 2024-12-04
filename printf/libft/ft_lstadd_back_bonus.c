@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/23 04:48:23 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 01:39:46 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	va_list ptr;
-	size_t	i;
+	t_list	*last;
 
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
 	{
-		if (str[i] == '%')
-		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
-		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
+		last = ft_lstlast(*lst);
+		last->next = new;
 	}
-	va_end(ptr);
-	return (0);
 }

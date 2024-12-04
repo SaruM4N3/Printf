@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Created: 2024/11/24 03:10:02 by zsonie            #+#    #+#             */
+/*   Updated: 2024/11/24 06:39:48 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str,  ...)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	va_list ptr;
-	size_t	i;
+	t_list	*newlst;
+	t_list	**last;
+	void	*f_res;
 
-	i = 0;
-	va_start(ptr,str);
-	while (str[i])
+	if (!lst || !f)
+		return (NULL);
+	newlst = NULL;
+	last = &newlst;
+	while (lst)
 	{
-		if (str[i] == '%')
+		f_res = f(lst->content);
+		*last = ft_lstnew(f_res);
+		if (!*last || !f_res)
 		{
-			ft_printf_action(str[i + 1], ptr);
-			i++;
+			del(f_res);
+			ft_lstclear(&newlst, del);
+			return (NULL);
 		}
-		else
-			ft_putchar_fd(str[i], 1);
-		i++;
+		last = &((*last)->next);
+		lst = lst->next;
 	}
-	va_end(ptr);
-	return (0);
+	return (newlst);
 }
