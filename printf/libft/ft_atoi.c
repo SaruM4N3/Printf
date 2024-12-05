@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:29 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 04:21:43 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/04 20:30:34 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int	ft_atoi(const char *str)
 				return (-1);
 			return (0);
 		}
-		num *=10;
+		num *= 10;
 		num += str[i] - 48;
 		i++;
 	}
 	return (num * sign);
 }
 /*
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	printf("%d\n", atoi(av[1]));
 	printf("%d\n", ft_atoi(av[1]));

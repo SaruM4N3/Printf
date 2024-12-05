@@ -6,25 +6,77 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:31:36 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 04:21:37 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/05 02:56:58 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	ft_printf_action(char current, va_list args)
+void	ft_putchar_iter(char c, int fd, size_t *fsize)
+{
+	if (fd < 0)
+		return ;
+	(*fsize)++;
+	write(fd, &c, 1);
+}
+
+static void	ft_putstr_iter(char *s, int fd, size_t *fsize)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+	{
+		(*fsize) += 6;
+		write(fd, "(null)", 6);
+		return ;
+	}
+	(*fsize) += ft_strlen(s);
+	if (write(fd, s, ft_strlen(s)) < 0)
+		return ;
+}
+
+static void	ft_putnbr_iter(int n, int fd, size_t *fsize)
+{
+	unsigned int	un;
+	char			c;
+
+	if (fd < 0)
+		return ;
+	if (n < 0)
+	{
+		un = (unsigned int)-n;
+		(*fsize)++;
+		write(fd, "-", 1);
+	}
+	else
+		un = n;
+	if (un <= 9)
+	{
+		(*fsize)++;
+		c = un + 48;
+		write(fd, &c, 1);
+	}
+	else
+	{
+		ft_putnbr_iter(un / 10, fd, fsize);
+		ft_putnbr_iter(un % 10, fd, fsize);
+	}
+}
+
+int	ft_printf_action(char current, va_list args, size_t *fsize)
 {
 	if (current == 'c')
-		ft_putchar_fd(va_arg(args, int), 1);
+		ft_putchar_iter(va_arg(args, int), 1, fsize);
 	else if (current == 's')
-		ft_putstr_fd(va_arg(args, char *), 1);
+		ft_putstr_iter(va_arg(args, char *), 1, fsize);
 	else if (current == 'p')
 		return ('p');
 	else if (current == 'd')
-		ft_putnbr_fd(va_arg(args, int), 1);
+		ft_putnbr_iter(va_arg(args, int), 1, fsize);
 	else if (current == 'i')
-		ft_putnbr_fd(va_arg(args, int), 1);
+		ft_putnbr_iter(va_arg(args, int), 1, fsize);
 	else if (current == 'u')
 		return ('u');
 	else if (current == 'x')
@@ -32,10 +84,12 @@ int	ft_printf_action(char current, va_list args)
 	else if (current == 'X')
 		return ('X');
 	else if (current == '%')
+	{
 		ft_putchar_fd('%', 1);
-	return (-1);
+		(*fsize)++;
+	}
+	return (0);
 }
-
 
 /*
 TODO:

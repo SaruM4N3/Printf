@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:06:08 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 02:53:31 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/05 02:46:28 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	while (s[i])
 	{
-		write(fd, "vive wejdene\n", 14);
 		if (write(fd, &s[i], 1) < 0)
 			return ;
 		i++;

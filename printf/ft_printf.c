@@ -6,30 +6,35 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 03:45:17 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/04 23:39:24 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *str,  ...)
+int	ft_printf(const char *str, ...)
 {
-	va_list ptr;
+	va_list	ptr;
 	size_t	i;
+	size_t	fsize;
 
 	i = 0;
-	va_start(ptr,str);
+	fsize = 0;
+	va_start(ptr, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			ft_printf_action(str[i + 1], ptr);
+			ft_printf_action(str[i + 1], ptr, &fsize);
 			i++;
 		}
 		else
+		{
 			ft_putchar_fd(str[i], 1);
+			fsize++;
+		}
 		i++;
 	}
 	va_end(ptr);
-	return (0);
+	return (fsize);
 }

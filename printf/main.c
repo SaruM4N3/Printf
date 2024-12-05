@@ -5,21 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 18:45:40 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 01:51:48 by zsonie           ###   ########.fr       */
+/*   Created: 2024/12/05 00:46:01 by zsonie            #+#    #+#             */
+/*   Updated: 2024/12/05 00:47:54 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h" 
+#include <stdio.h>
+#include "ft_printf.h"
 
-int	main()
+int	main(void)
 {
-	// __builtin_printf("monkeys %cre %d in the %s;\n printfresult: %i\n", 'a', 10,"place",\
-// __builtin_printf("monkeys %cre %d in the %s;\n", 'a', 10,"place"));
-// 
-	// ft_printf("monkeys %cre %d in the %s;\n printfresult: %i\n", 'a', 10,"place",\
-	//  ft_printf("monkeys %cre %d in the %s;\n", 'a', 10,"place"));
-	//  
-	ft_printf("FALSE: monkeys %cre %s %d; %i\n", 'a', "bsfjhdbfjusehbfds", 481516 , 2342);	 
-	__builtin_printf("\nTRUE: monkeys %cre ;\n", 'a');	 
-	}
+	printf("MONKEYS %cre in the %s;\n true: %d\n", 'a', "place", \
+printf("MONKEYS %cre in the %s ;", 'a', "place"));
+	ft_printf("MONKEYS %cre in the %s\n; false: %d\n", 'a', "place", \
+ft_printf("MONKEYS %cre in the %s ;", 'a', "place"));
+	return (0);
+}

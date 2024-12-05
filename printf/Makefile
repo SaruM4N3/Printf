@@ -67,7 +67,7 @@ all: $(NAME)
 
 $(NAME): $(OBJDIR) $(DEPDIR) $(OBJECTS) $(LIBFTOBJ)
 	@echo "$(GREEN)Creating Archive... \n$(YELLOW)$@$(RESET)\n"
-	@ar rcs $(NAME) $(OBJECTS)
+	@ar rcs $(NAME) $(OBJECTS) $(LIBFTOBJ)
 
 # Compile .c to .o
 $(OBJDIR)/%.o: %.c Makefile 
