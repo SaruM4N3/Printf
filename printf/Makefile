@@ -12,7 +12,8 @@ DEPDIR = .dep
 LIBFTDIR = libft
 
 SRCS =	ft_printf.c \
-		ft_printf_parse.c
+		ft_printf_parse.c \
+		ft_putnbr_base.c
 
 LIBFTSRCS =	$(LIBFTDIR)/ft_isalpha.c \
         $(LIBFTDIR)/ft_isdigit.c \

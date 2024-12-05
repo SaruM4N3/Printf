@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:31:36 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/05 02:56:58 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/05 05:01:11 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,19 @@ static void	ft_putnbr_iter(int n, int fd, size_t *fsize)
 	}
 }
 
+void	ft_pointer_action( unsigned long args, int fd, size_t *fsize)
+{
+	if (args == 0)
+	{
+		(*fsize) += 5;
+		write (fd, "(nil)", 5);
+		return ;
+	}
+	(*fsize) += 2;
+	write( 1, "0x", 2);
+	ft_putnbr_base(args, "0123456789abcdef", 1, fsize);
+}
+
 int	ft_printf_action(char current, va_list args, size_t *fsize)
 {
 	if (current == 'c')
@@ -72,17 +85,15 @@ int	ft_printf_action(char current, va_list args, size_t *fsize)
 	else if (current == 's')
 		ft_putstr_iter(va_arg(args, char *), 1, fsize);
 	else if (current == 'p')
-		return ('p');
-	else if (current == 'd')
-		ft_putnbr_iter(va_arg(args, int), 1, fsize);
-	else if (current == 'i')
+		ft_pointer_action(va_arg(args, unsigned long), 1, fsize);
+	else if (current == 'd' || current == 'i')
 		ft_putnbr_iter(va_arg(args, int), 1, fsize);
 	else if (current == 'u')
-		return ('u');
+		ft_putnbr_base(va_arg(args, unsigned int), "0123456789", 1, fsize);
 	else if (current == 'x')
-		return ('x');
+		ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef", 1, fsize);
 	else if (current == 'X')
-		return ('X');
+		ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", 1, fsize);
 	else if (current == '%')
 	{
 		ft_putchar_fd('%', 1);
