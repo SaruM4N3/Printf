@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/04 23:39:24 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/06 04:03:50 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			ft_printf_action(str[i + 1], ptr, &fsize);
+			ft_printf_parse(str[i + 1], ptr, &fsize);
 			i++;
 		}
 		else

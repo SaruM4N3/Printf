@@ -11,9 +11,9 @@ OBJDIR = .obj
 DEPDIR = .dep
 LIBFTDIR = libft
 
-SRCS =	ft_printf.c \
-		ft_printf_parse.c \
-		ft_putnbr_base.c
+SRCS =	ft_printf_parse.c \
+		ft_printf_utils.c \
+		ft_printf.c
 
 LIBFTSRCS =	$(LIBFTDIR)/ft_isalpha.c \
         $(LIBFTDIR)/ft_isdigit.c \
@@ -85,13 +85,8 @@ $(DEPDIR):
 	@echo "$(GREEN)Creating directory... $(YELLOW)$@$(RESET)"
 	@mkdir -p $(DEPDIR)
 
-$(LIBFTDIR)/%o: %.c 
-	@echo "$(YELLOW)Compiling objects and dependencies... $(GREEN)$@ $(YELLOW)from $(GREEN)$<$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@ -MP -MMD -MF $(DEPDIR)/$*.d
-
 ###Includes###
--include $(DEPFILES)/$*.d
-####################^^^^^THIS IS A TEST BUT NORMALLY DEPENDENCIES SHOULD BE BETTER OPTIMIZED
+-include $(DEPFILES)/$*.d $(LIBFTDEP)/$*.d
 
 ######################################CLEAN####################################
 

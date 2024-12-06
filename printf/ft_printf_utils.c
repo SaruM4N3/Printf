@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 03:09:45 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/05 04:19:47 by zsonie           ###   ########.fr       */
+/*   Created: 2024/12/06 04:06:56 by zsonie            #+#    #+#             */
+/*   Updated: 2024/12/06 04:09:03 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,35 @@ static int	ft_base_is_valid(char *base)
 	return (0);
 }
 
-void	ft_putnbr_base(unsigned long nbr, char *base, int fd, size_t *fsize)
+void	ft_putnbr_int(int n, int fd, size_t *fsize)
+{
+	unsigned int	un;
+	char			c;
+
+	if (fd < 0)
+		return ;
+	if (n < 0)
+	{
+		un = (unsigned int)-n;
+		(*fsize)++;
+		write(fd, "-", 1);
+	}
+	else
+		un = n;
+	if (un <= 9)
+	{
+		(*fsize)++;
+		c = un + 48;
+		write(fd, &c, 1);
+	}
+	else
+	{
+		ft_putnbr_int(un / 10, fd, fsize);
+		ft_putnbr_int(un % 10, fd, fsize);
+	}
+}
+
+void	ft_putnbr_base_ul(unsigned long nbr, char *base, int fd, size_t *fsize)
 {
 	unsigned long	unbr;
 
@@ -52,7 +80,7 @@ void	ft_putnbr_base(unsigned long nbr, char *base, int fd, size_t *fsize)
 	}
 	else
 	{
-		ft_putnbr_base(unbr / ft_strlen(base), base, fd, fsize);
-		ft_putnbr_base(unbr % ft_strlen(base), base, fd, fsize);
+		ft_putnbr_base_ul(unbr / ft_strlen(base), base, fd, fsize);
+		ft_putnbr_base_ul(unbr % ft_strlen(base), base, fd, fsize);
 	}
 }

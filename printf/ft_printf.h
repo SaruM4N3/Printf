@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:35:32 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/05 04:20:00 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/06 04:05:21 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 //------------------------------------VAR------------------------------------//
 ///////////////////////////////////////////////////////////////////////////////
 int		ft_printf(const char *str, ...);
-int		ft_printf_action(char current, va_list ptr, size_t *fsize);
-void	ft_putnbr_base(unsigned long nbr, char *base, int fd, size_t *fsize);
+int		ft_printf_parse(char current, va_list ptr, size_t *fsize);
+void	ft_putnbr_base_ul(unsigned long nbr, char *base, int fd, size_t *fsize);
+void	ft_putnbr_int(int n, int fd, size_t *fsize);
 
 #endif
