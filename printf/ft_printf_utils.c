@@ -6,12 +6,11 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 04:06:56 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/06 04:09:03 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/06 05:26:17 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int	ft_base_is_valid(char *base)
 {

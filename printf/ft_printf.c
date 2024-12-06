@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:30:24 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/06 04:03:50 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/06 05:43:29 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	fsize = 0;
+	if (!str)
+		return (1);
 	va_start(ptr, str);
 	while (str[i])
 	{

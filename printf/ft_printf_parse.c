@@ -6,7 +6,7 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:31:36 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/06 04:31:41 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/06 05:43:01 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	ft_putchar_fsize_incr(char c, int fd, size_t *fsize)
 {
 	if (fd < 0)
 		return ;
-	(*fsize)++;
-	write(fd, &c, 1);
+	(*fsize) += write(fd, &c, 1);
 }
 
 static void	ft_putstr_fsize_incr(char *s, int fd, size_t *fsize)
@@ -27,8 +26,7 @@ static void	ft_putstr_fsize_incr(char *s, int fd, size_t *fsize)
 	i = 0;
 	if (!s)
 	{
-		(*fsize) += 6;
-		write(fd, "(null)", 6);
+		(*fsize) += write(fd, "(null)", 6);
 		return ;
 	}
 	(*fsize) += ft_strlen(s);
@@ -40,12 +38,10 @@ static void	ft_pointer_action(unsigned long args, int fd, size_t *fsize)
 {
 	if (args == 0)
 	{
-		(*fsize) += 5;
-		write(fd, "(nil)", 5);
+		(*fsize) += write(fd, "(nil)", 5);
 		return ;
 	}
-	(*fsize) += 2;
-	write(fd, "0x", 2);
+	(*fsize) += write(fd, "0x", 2);
 	ft_putnbr_base_ul(args, "0123456789abcdef", fd, fsize);
 }
 
