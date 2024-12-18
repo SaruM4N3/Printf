@@ -6,17 +6,18 @@
 /*   By: zsonie <zsonie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 07:31:36 by zsonie            #+#    #+#             */
-/*   Updated: 2024/12/06 05:43:01 by zsonie           ###   ########.fr       */
+/*   Updated: 2024/12/10 01:33:02 by zsonie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_putchar_fsize_incr(char c, int fd, size_t *fsize)
+static int	ft_putchar_fsize_incr(char c, int fd, size_t *fsize)
 {
 	if (fd < 0)
 		return ;
 	(*fsize) += write(fd, &c, 1);
+	return (1);
 }
 
 static void	ft_putstr_fsize_incr(char *s, int fd, size_t *fsize)
