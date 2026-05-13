@@ -6,7 +6,7 @@
 
 A custom implementation of the standard C library function `printf()`. This project is part of the 42 school curriculum and teaches about variadic functions, string formatting, and output management.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [About](#about)
 - [Supported Conversions](#supported-conversions)
@@ -17,7 +17,7 @@ A custom implementation of the standard C library function `printf()`. This proj
 - [Project Structure](#project-structure)
 - [Testing](#testing)
 
-## 🎯 About
+## About
 
 **ft_printf** recreates the behavior of the original `printf()` function from the C standard library. It handles various format specifiers and converts arguments to formatted output strings.
 
@@ -28,7 +28,7 @@ A custom implementation of the standard C library function `printf()`. This proj
 - ✅ Return value: number of characters printed
 - ✅ Buffer management for efficient output
 
-## 🔤 Supported Conversions
+## Supported Conversions
 
 <details>
 <summary><b>Character and String Conversions</b></summary>
@@ -63,7 +63,7 @@ A custom implementation of the standard C library function `printf()`. This proj
 
 </details>
 
-## 📝 Function Prototype
+## Function Prototype
 
 ```c
 int ft_printf(const char *format, ...);
@@ -77,7 +77,7 @@ int ft_printf(const char *format, ...);
 - Returns the total number of characters printed (excluding the null terminator)
 - Returns `-1` on error
 
-## 🔨 Compilation
+## Compilation
 
 <details>
 <summary><b>Using the Makefile</b></summary>
@@ -114,7 +114,7 @@ gcc -Wall -Wextra -Werror main.c -L. -lftprintf
 
 </details>
 
-## 💻 Usage
+## Usage
 
 <details>
 <summary><b>Basic Examples</b></summary>
@@ -200,7 +200,7 @@ Returned: XX characters
 
 </details>
 
-## 🔍 Implementation Details
+## Implementation Details
 
 <details>
 <summary><b>Variadic Functions</b></summary>
@@ -269,7 +269,7 @@ Each specifier has a dedicated handler:
 
 </details>
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Printf/
@@ -288,7 +288,7 @@ Printf/
 └── README.md
 ```
 
-## 🧪 Testing
+## Testing
 
 <details>
 <summary><b>Comparison with Original printf</b></summary>
