@@ -374,4 +374,6 @@ valgrind --leak-check=full --track-origins=yes ./a.out
 
 </details>
 
----
+## License
+
+This project is part of the 42 school curriculum. Feel free to use it for educational purposes.
